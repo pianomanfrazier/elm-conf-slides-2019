@@ -110,7 +110,7 @@ renderNotes [ Note C 4 None ] Treble
 
 ## Random Precendence
  
-```elm
+```elm/5,10
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
