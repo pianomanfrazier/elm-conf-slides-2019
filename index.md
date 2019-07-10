@@ -5,41 +5,13 @@ layout: layouts/base.njk
 
 <section>
 
+## Building a Music Theory API with Types 
+
+</section>
+
+<section>
+
 ## @pianomanfrazier
-
-</section>
-
-<section>
-
-## Outline
-
-- I'm a pianist, teacher, performer
-- taught music theory and private lessons for years
-- students failed on fundamentals
-
-</section>
-
-<section>
-
-- fast forward switched careers
-- I still teach and perform on the side
-- I can now solve this problem
-
-</section>
-
-<section>
-  
-- release of Elm 19 I tried an experiment
-- "Could I make simple flashcards in the browser"
-- traditional flashcards problematic
-- most apps I would find aren't rigorous enough, didn't fit my needs
-
-</section>
-
-<section>
-  
-- feeling very encouraged now wanted to do intervals
-- now I needed a Theory Engine (a way to compute relationships between notes)
 
 </section>
 
@@ -96,7 +68,7 @@ type Accidental
 
 ## Note Record
 
-```elm/1-2
+```elm
 type alias Note =
   { name : NoteName
   , octave : Int
@@ -138,7 +110,7 @@ renderNotes [ Note C 4 None ] Treble
 
 ## Random Precendence
  
-```elm/1-4/5-8
+```elm
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
@@ -154,20 +126,6 @@ update msg model =
 
     NewNote note ->
       ( { model | note = note }, Cmd.none )
-```
-</section>
-
-<section>
-
-## Some JavaScript
-
-```js/3/4-6
-import { thingy } from "thing.js"
-
-console.log(thingy())
-console.log(`Thingy: ${thingy()}`)
-
-let that = this
 ```
 </section>
 
@@ -230,7 +188,20 @@ let that = this
 </section>
 
 <section
+data-background="/img/a_mess_of_cards_by_objekt_stock_d1a7uz5.jpg"
+>
+
+<h1 style="background: rgba(255,255,255,0.9); border-radius: 16px;">
+Flash Cards
+</h1>
+
+</section>
+<section
 data-background="https://api.thecatapi.com/v1/images/search?format=src&mime_types=image/gif"
 >
+
+<h1 style="background: rgba(255,255,255,0.5); border-radius: 16px;">
+Random Cat Pic
+</h1>
 
 </section>

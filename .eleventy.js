@@ -4,8 +4,8 @@ const emoji = require('markdown-it-emoji');
 const sup = require('markdown-it-sup');
 
 module.exports = function(eleventyConfig) {
-  // eleventyConfig.addPassthroughCopy('img');
-   eleventyConfig.addPlugin(pluginSyntaxHighlight);
+  eleventyConfig.addPassthroughCopy('img');
+  eleventyConfig.addPlugin(pluginSyntaxHighlight);
   eleventyConfig.addPassthroughCopy('css');
   eleventyConfig.addPassthroughCopy('js');
 
