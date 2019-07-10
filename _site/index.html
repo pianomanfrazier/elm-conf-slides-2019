@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Typed Music Theory</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/serif.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+    <link rel="stylesheet" href="/css/code.css">
+		<!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
+    <!-- <script src="https://pianomanfrazier.com/js/music.min.js"></script> -->
+    <script src="/js/elm.min.js"></script>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+        <section>
+<h2>@pianomanfrazier</h2>
+</section>
+<section>
+<h2>Outline</h2>
+<ul>
+<li>I’m a pianist, teacher, performer</li>
+<li>taught music theory and private lessons for years</li>
+<li>students failed on fundamentals</li>
+</ul>
+</section>
+<section>
+<ul>
+<li>fast forward switched careers</li>
+<li>I still teach and perform on the side</li>
+<li>I can now solve this problem</li>
+</ul>
+</section>
+<section>
+<ul>
+<li>release of Elm 19 I tried an experiment</li>
+<li>“Could I make simple flashcards in the browser”</li>
+<li>traditional flashcards problematic</li>
+<li>most apps I would find aren’t rigorous enough, didn’t fit my needs</li>
+</ul>
+</section>
+<section>
+<ul>
+<li>feeling very encouraged now wanted to do intervals</li>
+<li>now I needed a Theory Engine (a way to compute relationships between notes)</li>
+</ul>
+</section>
+<section>
+<h1>My Problem</h1>
+</section>
+<section>
+<p><svg width="100%" viewBox="7 0 14 10" style="font-family: sans-serif; font-size: 11px; max-width: 100%;"><g id="svgFlashCard"><g id="lines" transform="translate(0,2)"><line id="line1" x1="0" x2="12" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,1)"></line><line id="line1" x1="0" x2="12" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,2)"></line><line id="line1" x1="0" x2="12" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,3)"></line><line id="line1" x1="0" x2="12" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,4)"></line><line id="line1" x1="0" x2="12" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,5)"></line></g><g id="clef" transform="translate(0,2)"><path d="M376 262c4 0 9 1 13 1c155 0 256 -128 256 -261c0 -76 -33 -154 -107 -210c-22 -17 -47 -28 -73 -36c3 -35 5 -70 5 -105c0 -19 -1 -39 -2 -58c-7 -120 -90 -228 -208 -228c-108 0 -195 88 -195 197c0 58 53 103 112 103c54 0 95 -47 95 -103c0 -52 -43 -95 -95 -95
+c-11 0 -21 2 -31 6c26 -39 68 -65 117 -65c96 0 157 92 163 191c1 18 2 37 2 55c0 31 -1 61 -4 92c-29 -5 -58 -8 -89 -8c-188 0 -333 172 -333 374c0 177 131 306 248 441c-19 62 -37 125 -45 190c-6 52 -7 104 -7 156c0 115 55 224 149 292c3 2 7 3 10 3c4 0 7 0 10 -3
+c71 -84 133 -245 133 -358c0 -143 -86 -255 -180 -364c21 -68 39 -138 56 -207zM461 -203c68 24 113 95 113 164c0 90 -66 179 -173 190c24 -116 46 -231 60 -354zM74 28c0 -135 129 -247 264 -247c28 0 55 2 82 6c-14 127 -37 245 -63 364c-79 -8 -124 -61 -124 -119
+c0 -44 25 -91 81 -123c5 -5 7 -10 7 -15c0 -11 -10 -22 -22 -22c-3 0 -6 1 -9 2c-80 43 -117 115 -117 185c0 88 58 174 160 197c-14 58 -29 117 -46 175c-107 -121 -213 -243 -213 -403zM408 1045c-99 -48 -162 -149 -162 -259c0 -74 18 -133 36 -194
+c80 97 146 198 146 324c0 55 -4 79 -20 129z" fill="#222" transform="translate(8.8,4) scale(0.004, -0.004)"></path></g><g id="note" transform="translate(14,5)"><path d="M220 138c56 0 109 -29 109 -91c0 -72 -56 -121 -103 -149c-36 -21 -76 -36 -117 -36c-56 0 -109 29 -109 91c0 72 56 121 103 149c36 21 76 36 117 36z" fill="#222" transform="translate(0,3) scale(0.004, -0.004)"></path><rect fill="#222" height="3.3" width="0.13" transform="translate(1.18,-0.5)"></rect></g><g id="legerLines" transform="translate(0,5)"><line x1="5.5" x2="7.8" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,3)"></line></g></g></svg></p>
+</section>
+<section>
+<h1>Types</h1>
+</section>
+<section>
+<h2>Note Name</h2>
+<pre class="language-elm"><code class="language-elm"><span class="highlight-line"><span class="token keyword">type</span> <span class="token constant">NoteName</span></span><br><span class="highlight-line">  <span class="token operator">=</span> <span class="token constant">C</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">D</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">E</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">F</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">G</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">A</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">B</span>          </span></code></pre>
+</section>
+<section>
+<h2>Accidental</h2>
+<pre class="language-elm"><code class="language-elm"><span class="highlight-line"><span class="token keyword">type</span> <span class="token constant">Accidental</span></span><br><span class="highlight-line">  <span class="token operator">=</span> <span class="token constant">DoubleSharp</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">Sharp</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">Natural</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">None</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">Flat</span></span><br><span class="highlight-line">  <span class="token operator">|</span> <span class="token constant">DoubleFlat</span></span></code></pre>
+</section>
+<section>
+<h2>Note Record</h2>
+<pre class="language-elm"><code class="language-elm"><span class="highlight-line"><span class="token keyword">type</span> <span class="token keyword">alias</span> <span class="token constant">Note</span> <span class="token operator">=</span></span><br><mark class="highlight-line highlight-line-active">  <span class="token punctuation">{</span> <span class="token hvariable">name</span> <span class="token operator">:</span> <span class="token constant">NoteName</span></mark><br><mark class="highlight-line highlight-line-active">  <span class="token punctuation">,</span> <span class="token hvariable">octave</span> <span class="token operator">:</span> <span class="token constant">Int</span></mark><br><span class="highlight-line">  <span class="token punctuation">,</span> <span class="token hvariable">accidental</span> <span class="token operator">:</span> <span class="token constant">Accidental</span></span><br><span class="highlight-line">  <span class="token punctuation">}</span></span></code></pre>
+</section>
+<section>
+<h2>Render Notes</h2>
+<pre class="language-elm"><code class="language-elm"><span class="highlight-line"><span class="token hvariable">renderNotes</span> <span class="token operator">:</span> <span class="token constant">List</span> <span class="token constant">Note</span> <span class="token operator">-></span> <span class="token constant">Clef</span> <span class="token operator">-></span> <span class="token constant">Html</span> <span class="token hvariable">msg</span></span><br><span class="highlight-line"><span class="token hvariable">renderNotes</span> <span class="token hvariable">notes</span> <span class="token hvariable">clef</span> <span class="token operator">=</span></span><br><span class="highlight-line">  <span class="token hvariable">svg</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span></span></code></pre>
+<pre class="language-elm"><code class="language-elm"><span class="highlight-line"><span class="token hvariable">renderNotes</span> <span class="token punctuation">[</span> <span class="token constant">Note</span> <span class="token constant">C</span> <span class="token number">4</span> <span class="token constant">None</span> <span class="token punctuation">]</span> <span class="token constant">Treble</span></span></code></pre>
+</section>
+<section>
+<h1>Random</h1>
+</section>
+<section>
+<h2>Random Precedence</h2>
+<ol>
+<li>Clef</li>
+<li>Note from clef range</li>
+</ol>
+</section>
+<section>
+<h2>Random Precendence</h2>
+<pre class="language-elm"><code class="language-elm"><span class="highlight-line"><span class="token hvariable">update</span> <span class="token operator">:</span> <span class="token constant">Msg</span> <span class="token operator">-></span> <span class="token constant">Model</span> <span class="token operator">-></span> <span class="token punctuation">(</span><span class="token constant">Model</span><span class="token punctuation">,</span> <span class="token constant">Cmd</span> <span class="token constant">Msg</span><span class="token punctuation">)</span></span><br><ins class="highlight-line highlight-line-add"><span class="token hvariable">update</span> <span class="token hvariable">msg</span> <span class="token hvariable">model</span> <span class="token operator">=</span></ins><br><ins class="highlight-line highlight-line-add">  <span class="token keyword">case</span> <span class="token hvariable">msg</span> <span class="token keyword">of</span></ins><br><ins class="highlight-line highlight-line-add">    <span class="token constant">GetRandomClef</span> <span class="token operator">-></span></ins><br><ins class="highlight-line highlight-line-add">      <span class="token punctuation">(</span> <span class="token hvariable">model</span></ins><br><del class="highlight-line highlight-line-remove">      <span class="token punctuation">,</span> <span class="token hvariable">Random.generate</span> <span class="token constant">NewClef</span> <span class="token hvariable">clefPool</span></del><br><del class="highlight-line highlight-line-remove">      <span class="token punctuation">)</span></del><br><del class="highlight-line highlight-line-remove"></del><br><del class="highlight-line highlight-line-remove">    <span class="token constant">NewClef</span> <span class="token hvariable">clef</span> <span class="token operator">-></span></del><br><span class="highlight-line">      <span class="token punctuation">(</span> <span class="token punctuation">{</span> <span class="token hvariable">model</span> <span class="token operator">|</span> <span class="token hvariable">clef</span> <span class="token operator">=</span> <span class="token hvariable">clef</span> <span class="token punctuation">}</span></span><br><span class="highlight-line">      <span class="token punctuation">,</span> <span class="token hvariable">Random.generate</span> <span class="token constant">NewNote</span> <span class="token punctuation">(</span><span class="token hvariable">clefNoteRange</span> <span class="token hvariable">clef</span><span class="token punctuation">)</span></span><br><span class="highlight-line">      <span class="token punctuation">)</span></span><br><span class="highlight-line"></span><br><span class="highlight-line">    <span class="token constant">NewNote</span> <span class="token hvariable">note</span> <span class="token operator">-></span></span><br><span class="highlight-line">      <span class="token punctuation">(</span> <span class="token punctuation">{</span> <span class="token hvariable">model</span> <span class="token operator">|</span> <span class="token hvariable">note</span> <span class="token operator">=</span> <span class="token hvariable">note</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token hvariable">Cmd.none</span> <span class="token punctuation">)</span></span></code></pre>
+</section>
+<section>
+<h2>Some JavaScript</h2>
+<pre class="language-js"><code class="language-js"><span class="highlight-line"><span class="token keyword">import</span> <span class="token punctuation">{</span> thingy <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"thing.js"</span></span><br><span class="highlight-line"></span><br><span class="highlight-line">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">thingy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span><br><ins class="highlight-line highlight-line-add">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`Thingy: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">thingy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span></ins><br><del class="highlight-line highlight-line-remove"></del><br><del class="highlight-line highlight-line-remove"><span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span></del></code></pre>
+</section>
+<section>
+<h3>Note Flashcards</h3>
+<div id='notes'></div>
+<script>
+    var embedNode = document.getElementById('notes');
+    var app = eval("Elm." + "Notes");
+    app.init({
+        node: embedNode
+    });
+</script>
+</section>
+<section>
+<h3>Interval Flashcards</h3>
+<div id='intervals'></div>
+<script>
+    var embedNode = document.getElementById('intervals');
+    var app = eval("Elm." + "Intervals");
+    app.init({
+        node: embedNode
+    });
+</script>
+</section>
+<section>
+<h3>Triad Flashcards</h3>
+<div id='triads'></div>
+<script>
+    var embedNode = document.getElementById('triads');
+    var app = eval("Elm." + "Triads");
+    app.init({
+        node: embedNode
+    });
+</script>
+</section>
+<section>
+<h3>Seventh Chord Flashcards</h3>
+<div id='sevenths'></div>
+<script>
+    var embedNode = document.getElementById('sevenths');
+    var app = eval("Elm." + "Sevenths");
+    app.init({
+        node: embedNode
+    });
+</script>
+</section>
+<section>
+<h1>Intervals</h1>
+</section>
+<section>
+<h1>Triads</h1>
+</section>
+<section>
+<h1>7<sup>th</sup> Chords</h1>
+</section>
+<section>
+<p><svg width="100%" viewBox="8 0 14 10" style="font-family: sans-serif; font-size: 11px; max-width: 100%;"><g><g id="lines" transform="translate(0,2)"><line x1="0" x2="14" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,1)"></line><line x1="0" x2="14" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,2)"></line><line x1="0" x2="14" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,3)"></line><line x1="0" x2="14" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,4)"></line><line x1="0" x2="14" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,5)"></line></g><g id="clef" transform="translate(0,2)"><path d="M557 -125c0 28 23 51 51 51s51 -23 51 -51s-23 -51 -51 -51s-51 23 -51 51zM557 125c0 28 23 51 51 51s51 -23 51 -51s-23 -51 -51 -51s-51 23 -51 51zM232 263c172 0 293 -88 293 -251c0 -263 -263 -414 -516 -521c-3 -3 -6 -4 -9 -4c-7 0 -13 6 -13 13c0 3 1 6 4 9 c202 118 412 265 412 493c0 120 -63 235 -171 235c-74 0 -129 -54 -154 -126c11 5 22 8 34 8c55 0 100 -45 100 -100c0 -58 -44 -106 -100 -106c-60 0 -112 47 -112 106c0 133 102 244 232 244z" fill="#222" transform="translate(8.8,2) scale(0.004, -0.004)"></path></g><g id="notes" transform="translate(3,0)"><g id="noteHeads"><g transform="translate(0,0)"><g transform="translate(14,1.5)"><path d="M213 112c-50 0 -69 -43 -69 -88c0 -77 57 -136 134 -136c50 0 69 43 69 88c0 77 -57 136 -134 136zM491 0c0 -43 -34 -75 -72 -96c-53 -29 -114 -40 -174 -40s-120 11 -173 40c-38 21 -72 53 -72 96s34 75 72 96c53 29 113 40 173 40s121 -11 174 -40 c38 -21 72 -53 72 -96z" fill="#222" transform="translate(0,3) scale(0.004, -0.004)"></path></g><g transform="translate(0,5)"></g></g><g transform="translate(0,0)"><g transform="translate(14,0.5)"><path d="M213 112c-50 0 -69 -43 -69 -88c0 -77 57 -136 134 -136c50 0 69 43 69 88c0 77 -57 136 -134 136zM491 0c0 -43 -34 -75 -72 -96c-53 -29 -114 -40 -174 -40s-120 11 -173 40c-38 21 -72 53 -72 96s34 75 72 96c53 29 113 40 173 40s121 -11 174 -40 c38 -21 72 -53 72 -96z" fill="#222" transform="translate(0,3) scale(0.004, -0.004)"></path></g><g transform="translate(0,5)"></g></g><g transform="translate(1.7,0)"><g transform="translate(14,0)"><path d="M213 112c-50 0 -69 -43 -69 -88c0 -77 57 -136 134 -136c50 0 69 43 69 88c0 77 -57 136 -134 136zM491 0c0 -43 -34 -75 -72 -96c-53 -29 -114 -40 -174 -40s-120 11 -173 40c-38 21 -72 53 -72 96s34 75 72 96c53 29 113 40 173 40s121 -11 174 -40 c38 -21 72 -53 72 -96z" fill="#222" transform="translate(0,3) scale(0.004, -0.004)"></path></g><g transform="translate(0,5)"></g></g><g transform="translate(0,0)"><g transform="translate(14,-1)"><path d="M213 112c-50 0 -69 -43 -69 -88c0 -77 57 -136 134 -136c50 0 69 43 69 88c0 77 -57 136 -134 136zM491 0c0 -43 -34 -75 -72 -96c-53 -29 -114 -40 -174 -40s-120 11 -173 40c-38 21 -72 53 -72 96s34 75 72 96c53 29 113 40 173 40s121 -11 174 -40 c38 -21 72 -53 72 -96z" fill="#222" transform="translate(0,3) scale(0.004, -0.004)"></path></g><g transform="translate(0,5)"><line x1="5.5" x2="8.45" y1="0" y2="0" stroke-width="0.1" stroke="#222" transform="translate(8,-3)"></line></g></g></g><g id="accidentals"><path d="M27 41l-1 -66v-11c0 -22 1 -44 4 -66c45 38 93 80 93 139c0 33 -14 67 -43 67c-31 0 -52 -30 -53 -63zM-15 -138l-12 595c8 5 18 8 27 8s19 -3 27 -8l-7 -345c25 21 58 34 91 34c52 0 89 -48 89 -102c0 -80 -86 -117 -147 -169c-15 -13 -24 -38 -45 -38 c-13 0 -23 11 -23 25z" fill="#222" transform="translate(10.7,3.5) scale(0.0040, -0.0040)"></path><path d="M27 41l-1 -66v-11c0 -22 1 -44 4 -66c45 38 93 80 93 139c0 33 -14 67 -43 67c-31 0 -52 -30 -53 -63zM-15 -138l-12 595c8 5 18 8 27 8s19 -3 27 -8l-7 -345c25 21 58 34 91 34c52 0 89 -48 89 -102c0 -80 -86 -117 -147 -169c-15 -13 -24 -38 -45 -38 c-13 0 -23 11 -23 25z" fill="#222" transform="translate(11.7,4.5) scale(0.0040, -0.0040)"></path><path d="M27 41l-1 -66v-11c0 -22 1 -44 4 -66c45 38 93 80 93 139c0 33 -14 67 -43 67c-31 0 -52 -30 -53 -63zM-15 -138l-12 595c8 5 18 8 27 8s19 -3 27 -8l-7 -345c25 21 58 34 91 34c52 0 89 -48 89 -102c0 -80 -86 -117 -147 -169c-15 -13 -24 -38 -45 -38 c-13 0 -23 11 -23 25z" fill="#222" transform="translate(12.7,3) scale(0.0040, -0.0040)"></path></g></g></g></svg></p>
+</section>
+<section
+data-background="https://api.thecatapi.com/v1/images/search?format=src&mime_types=image/gif"
+>
+</section>
+
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				],
+        history: true,
+        overview: true,
+        mousewheel: true,
+        transition: 'none'
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "elm-conf-slides-2019",
+  "version": "1.0.0",
+  "description": "Music Theory with Types",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "@11ty/eleventy",
+    "dev": "@11ty/eleventy --serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pianomanfrazier/elm-conf-slides-2019.git"
+  },
+  "keywords": [
+    "revealjs",
+    "html",
+    "javascript"
+  ],
+  "author": "Ryan Frazier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pianomanfrazier/elm-conf-slides-2019/issues"
+  },
+  "homepage": "https://github.com/pianomanfrazier/elm-conf-slides-2019#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^0.8.3",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^2.0.3",
+    "markdown-it": "^9.0.0",
+    "markdown-it-emoji": "^1.4.0",
+    "markdown-it-sup": "^1.0.0"
+  }
+}

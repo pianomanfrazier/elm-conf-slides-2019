@@ -1,0 +1,10 @@
+{% macro inlineElm(node, module) %}
+<div id='{{ node }}'></div>
+<script>
+    var embedNode = document.getElementById('{{ node }}');
+    var app = eval("Elm." + "{{ module }}");
+    app.init({
+        node: embedNode
+    });
+</script>
+{% endmacro %}
