@@ -188,7 +188,7 @@ update msg model =
 </section>
 
 <section
-data-background="/img/a_mess_of_cards_by_objekt_stock_d1a7uz5.jpg"
+data-background="/img/a_mess_of_cards_by_objekt_stock.jpg"
 >
 
 <h1 style="background: rgba(255,255,255,0.9); border-radius: 16px;">
