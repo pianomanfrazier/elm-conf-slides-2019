@@ -5,7 +5,11 @@ layout: layouts/base.njk
 
 <section>
 
-## Building a Music Theory API with Types 
+## Building a Music Theory API with Types
+
+	<aside class="notes">
+		Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit »S« on your keyboard).
+	</aside>
 
 </section>
 
