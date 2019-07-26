@@ -21,8 +21,12 @@ pre.language-elm::before {
   content: "Elm";
 }
 pre.language-js::before {
+  color: #f7df1e;
+  content: "JavaScript";
+}
+pre.language-python::before {
   color: #fd971f;
-  content: "JS";
+  content: "Python";
 }
 .highlight-line {
   display: inline-block;
