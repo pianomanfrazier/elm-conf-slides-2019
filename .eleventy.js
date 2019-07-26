@@ -8,6 +8,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
   eleventyConfig.addPassthroughCopy('css');
   eleventyConfig.addPassthroughCopy('js');
+  eleventyConfig.addPassthroughCopy('lib');
+  eleventyConfig.addPassthroughCopy('plugin');
 
   /* Markdown Plugins */
   const options = {

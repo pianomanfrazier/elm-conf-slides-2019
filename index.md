@@ -23,6 +23,74 @@ layout: layouts/base.njk
 
 <section>
 
+# Previous Work
+
+</section>
+
+<section>
+
+## Teoria.js
+
+```js
+// Create notes:
+var a4 = teoria.note('a4');       // Scientific notation
+var g5 = teoria.note("g''");      // Helmholtz notation
+var c3 = teoria.note.fromKey(28); // From a piano key number
+
+// Find and create notes based on intervals
+teoria.interval(a4, g5);    // Returns a Interval object representing a minor seventh
+teoria.interval(a4, 'M6');  // Returns a Note representing F#5
+a4.interval('m3');          // Returns a Note representing C#4
+a4.interval(g5);            // Returns a Interval object representing a minor seventh
+a4.interval(teoria.note('bb5')).invert(); // Returns a Interval representing a major seventh
+```
+
+<small>See https://github.com/saebekassebil/teoria</small>
+
+</section>
+
+<section>
+
+## Tonal.js
+
+```js
+import { note, interval, transpose, distance } from "@tonaljs/tonal";
+
+note("A4").midi; // => 60
+note("a4").freq; // => 440
+note("c#2").accidentals; // => '#'
+note("x").midi; // => undefined
+interval("5P").semitones; // => 7
+transpose("C4", "5P"); // => "G4"
+distance("C4", "G4"); // => "5P"
+```
+<small>See https://github.com/tonaljs/tonal</small>
+<em>Version 3 in TypeScript!</em>
+
+</section>
+
+<section>
+
+## Mingus (python)
+
+```python
+>>> intervals.minor_second("C")
+"Db"
+>>> intervals.major_sixth("C")
+"A"
+>>> chords.minor_triad("C")
+["C", "Eb", "G"]
+>>> chords.diminished_triad("C")
+["C", "Eb", "Gb"]
+>>> chords.major_seventh("C")
+["C", "E", "G", "B"]
+```
+<small>See https://bspaans.github.io/python-mingus/</small>
+
+</section>
+
+<section>
+
 {% include "middleC.svg" %}
 
 </section>
@@ -141,9 +209,185 @@ update msg model =
 
 <section>
 
+# Intervals?
+
+</section>
+
+<section>
+
+# What Is An Interval?
+
+</section>
+
+<section>
+
+```elm
+{-| Major Sixth == { number : 6, halfSteps : 9 }
+-}
+type alias Interval =
+    { number : Int, halfSteps : Int }
+```
+
+</section>
+
+<section>
+
+```elm
+type Quality
+    = Diminished
+    | Minor
+    | Major
+    | Augmented
+    | Perfect
+```
+
+</section>
+
+<section>
+
+## Major = :)
+
+## Minor = :(
+
+</section>
+
+<section>
+
+```elm
+{-| get the absolute step id of the note names (i.e. the white keys)
+-}
+noteNameToStep : NoteName -> Int
+noteNameToStep note =
+    case note of
+        C -> 0
+        D -> 1
+        E -> 2
+        F -> 3
+        G -> 4
+        ...
+```
+
+</section>
+
+<section>
+
+```elm
+stepToNoteName : Int -> Maybe NoteName
+stepToNoteName step =
+    case step of
+        0 -> Just C
+        1 -> Just D
+        2 -> Just E
+        3 -> Just F
+        4 -> Just G
+        ...
+        _ -> Nothing
+
+```
+
+</section>
+
+<section>
+
+```elm
+{-| get the absolute half step id of the note names (i.e. the white keys)
+-}
+noteNameToHalfStep : NoteName -> Int
+noteNameToHalfStep note =
+    case note of
+        C -> 0
+        D -> 2
+        E -> 4
+        F -> 5
+        G -> 7
+        ...
+```
+
+</section>
+
+
+<section>
+
+```elm
+{-| Given a NoteName and an accidental return absolute half step count
+  -}
+  adjustHalfStepAccidental : NoteName -> Accidental -> Int
+  adjustHalfStepAccidental note accidental =
+      case accidental of
+          DoubleFlat -> noteNameToHalfStep note - 2
+
+          Flat -> noteNameToHalfStep note - 1
+
+          Natural -> noteNameToHalfStep note
+
+          None -> noteNameToHalfStep note
+
+          Sharp -> noteNameToHalfStep note + 1
+
+          DoubleSharp -> noteNameToHalfStep note + 2
+```
+
+</section>
+
+<section>
+
 ### Interval Flashcards
 
 {{ inlineElm('intervals', 'Intervals') }}
+
+</section>
+
+<section>
+
+## Notes as Primitives??? :confused:
+
+</section>
+
+<section>
+
+# A {% include "sharp.svg" %} == B {% include "flat.svg" %}
+
+</section>
+
+<section>
+
+```elm
+compareNotes : Note -> Note -> Order
+compareNotes note1 note2 =
+    let
+        n1 =
+            noteToInt note1
+
+        n2 =
+            noteToInt note2
+    in
+    compare n1 n2
+```
+</section>
+
+<section>
+
+```elm
+{-| equivalent to (==) note1 note2
+-}
+notesEQ : Note -> Note -> Bool
+notesEQ note1 note2 =
+    compareNotes note1 note2 == EQ
+
+
+{-| equivalent to (<) note1 note2
+-}
+notesLT : Note -> Note -> Bool
+notesLT note1 note2 =
+    compareNotes note1 note2 == LT
+```
+
+</section>
+
+
+<section>
+
+# Triads
 
 </section>
 
@@ -157,29 +401,18 @@ update msg model =
 
 <section>
 
+# 7^th^ Chords
+
+</section>
+
+<section>
+
 ### Seventh Chord Flashcards
 
 {{ inlineElm('sevenths', 'Sevenths') }}
 
 </section>
 
-<section>
-
-# Intervals
-
-</section>
-
-<section>
-
-# Triads
-
-</section>
-
-<section>
-
-# 7^th^ Chords
-
-</section>
 
 <section>
 
