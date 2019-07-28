@@ -23,6 +23,34 @@ layout: layouts/base.njk
 
 <section>
 
+# Why Music Theory?
+
+</section>
+
+<section>
+
+<img src="/img/immortal_game.png" alt="The Immortal Game" width="60%">
+
+</section>
+
+<section>
+
+## Recall memory for visually presented chess positions
+
+<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
+
+</section>
+
+<section>
+
+<img src="/img/figure_1.jpg" alt="Chess Figure 1" width="400">
+
+<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
+
+</section>
+
+<section>
+
 # Previous Work
 
 </section>
@@ -86,12 +114,6 @@ distance("C4", "G4"); // => "5P"
 ["C", "E", "G", "B"]
 ```
 <small>See https://bspaans.github.io/python-mingus/</small>
-
-</section>
-
-<section>
-
-{% include "middleC.svg" %}
 
 </section>
 
@@ -331,6 +353,12 @@ noteNameToHalfStep note =
 
 <section>
 
+## TODO: example api for intervals
+
+</section>
+
+<section>
+
 ### Interval Flashcards
 
 {{ inlineElm('intervals', 'Intervals') }}
@@ -384,6 +412,16 @@ notesLT note1 note2 =
 
 </section>
 
+<section>
+
+```elm
+sortNotes : List Note -> List Note
+sortNotes notes =
+    List.sortWith compareNotes note
+```
+
+</section>
+
 
 <section>
 
@@ -401,6 +439,12 @@ notesLT note1 note2 =
 
 <section>
 
+## TODO: example api for triads
+
+</section>
+
+<section>
+
 # 7^th^ Chords
 
 </section>
@@ -413,28 +457,8 @@ notesLT note1 note2 =
 
 </section>
 
-
 <section>
 
-{% include "dominant.svg" %}
-
-</section>
-
-<section
-data-background="/img/a_mess_of_cards_by_objekt_stock.jpg"
->
-
-<h1 style="background: rgba(255,255,255,0.9); border-radius: 16px;">
-Flash Cards
-</h1>
-
-</section>
-<section
-data-background="https://api.thecatapi.com/v1/images/search?format=src&mime_types=image/gif"
->
-
-<h1 style="background: rgba(255,255,255,0.5); border-radius: 16px;">
-Random Cat Pic
-</h1>
+## TODO: example api for 7^th^ chords
 
 </section>
