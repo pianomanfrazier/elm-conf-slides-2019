@@ -163,6 +163,8 @@ type Accidental
 ## Note Record
 
 ```elm
+{-| Middle C == Note C 4 None
+-}
 type alias Note =
   { name : NoteName
   , octave : Int
@@ -210,12 +212,12 @@ update msg model =
   case msg of
     GetRandomClef ->
       ( model
-      , Random.generate NewClef clefPool
+      , Random.generate NewClef <| Random.Array.sample <| Array.fromList clefPool
       )
 
     NewClef clef ->
       ( { model | clef = clef }
-      , Random.generate NewNote (clefNoteRange clef)
+      , Random.generate NewNote <| Random.Array.sample <| Array.fromList (clefNoteRange clef)
       )
 
     NewNote note ->
@@ -271,6 +273,35 @@ type Quality
 
 <section>
 
+```elm
+{-| IntervalName Major 6
+-}
+type alias IntervalName =
+    { quality : Quality, interval : Int 
+```
+
+</section>
+
+<section>
+
+```elm
+{-| getInterval (IntervalName Major 6) Up (Note C 4 None) == [ Note C 4 None, Note A 4 None ]
+-}
+getInterval : IntervalName -> Direction -> Note -> List Note
+getInterval interval direction root =
+    case direction of
+        Up ->
+            [ root, transposeNote interval direction root ]
+
+        Down ->
+            [ transposeNote interval direction root, root ]
+
+```
+
+</section>
+
+<section>
+
 ## Major = :)
 
 ## Minor = :(
@@ -290,7 +321,8 @@ noteNameToStep note =
         E -> 2
         F -> 3
         G -> 4
-        ...
+        A -> 5
+        B -> 6
 ```
 
 </section>
@@ -306,7 +338,8 @@ stepToNoteName step =
         2 -> Just E
         3 -> Just F
         4 -> Just G
-        ...
+        5 -> Just A
+        6 -> Just B
         _ -> Nothing
 
 ```
@@ -326,7 +359,8 @@ noteNameToHalfStep note =
         E -> 4
         F -> 5
         G -> 7
-        ...
+        A -> 9
+        B -> 11
 ```
 
 </section>
@@ -352,12 +386,6 @@ noteNameToHalfStep note =
 
           DoubleSharp -> noteNameToHalfStep note + 2
 ```
-
-</section>
-
-<section>
-
-## TODO: example api for intervals
 
 </section>
 
@@ -435,15 +463,32 @@ sortNotes notes =
 
 <section>
 
-### Triad Flashcards
+```elm
+{-|
+getTriad (Note C 1 None) Major ==
+  [ Note C 1 None, Note E 1 None, Note G 1 None ] 
+-}
+getTriad : Note -> Quality -> List Note
+getTriad root quality =
+    case quality of
+        Diminished -> [ root, getNote Min 3, getNote Dim 5 ]
 
-{{ inlineElm('triads', 'Triads') }}
+        Minor -> [ root, getNote Min 3, getNote Perfect 5 ]
+
+        Major -> [ root, getNote Maj 3, getNote Perfect 5 ]
+
+        Augmented -> [ root, getNote Maj 3, getNote Aug 5 ]
+
+        Perfect -> []
+```
 
 </section>
 
 <section>
 
-## TODO: example api for triads
+### Triad Flashcards
+
+{{ inlineElm('triads', 'Triads') }}
 
 </section>
 
@@ -455,14 +500,43 @@ sortNotes notes =
 
 <section>
 
-### Seventh Chord Flashcards
-
-{{ inlineElm('sevenths', 'Sevenths') }}
+```elm
+type Quality7
+    = FullDim
+    | HalfDim
+    | Dominant
+    | MinMaj
+    | MajMaj
+    | MinMin
+```
 
 </section>
 
 <section>
 
-## TODO: example api for 7^th^ chords
+```elm
+getSeventhChord : Note -> Quality7 -> List Note
+getSeventhChord root quality =
+    case quality of
+        FullDim -> getTriad root Dim ++ [ getNote Dim 7 ]
+
+        HalfDim -> getTriad root Dim ++ [ getNote Min 7 ]
+
+        MinMin -> getTriad root Min ++ [ getNote Min 7 ]
+
+        MinMaj -> getTriad root Min ++ [ getNote Maj 7 ]
+
+        MajMaj -> getTriad root Maj ++ [ getNote Maj 7 ]
+
+        Dominant -> getTriad root Maj ++ [ getNote Min 7 ]
+```
+
+</section>
+
+<section>
+
+### Seventh Chord Flashcards
+
+{{ inlineElm('sevenths', 'Sevenths') }}
 
 </section>
