@@ -27,99 +27,10 @@ Oh hey, these are some notes. They'll be hidden in your presentation, but you ca
 
 <section>
 
-# Why Music Theory?
+# Why It Matters
 
 </section>
 
-<section>
-
-<img src="/img/immortal_game.png" alt="The Immortal Game" width="60%">
-
-</section>
-
-<section>
-
-## Recall memory for visually presented chess positions
-
-<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
-
-</section>
-
-<section>
-
-<img src="/img/figure_1.jpg" alt="Chess Figure 1" width="400">
-
-<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
-
-</section>
-
-<section>
-
-# Previous Work
-
-</section>
-
-<section>
-
-## Teoria.js
-
-```js
-// Create notes:
-var a4 = teoria.note('a4');       // Scientific notation
-var g5 = teoria.note("g''");      // Helmholtz notation
-var c3 = teoria.note.fromKey(28); // From a piano key number
-
-// Find and create notes based on intervals
-teoria.interval(a4, g5);    // Returns a Interval object representing a minor seventh
-teoria.interval(a4, 'M6');  // Returns a Note representing F#5
-a4.interval('m3');          // Returns a Note representing C#4
-a4.interval(g5);            // Returns a Interval object representing a minor seventh
-a4.interval(teoria.note('bb5')).invert(); // Returns a Interval representing a major seventh
-```
-
-<small>See https://github.com/saebekassebil/teoria</small>
-
-</section>
-
-<section>
-
-## Tonal.js
-
-```js
-import { note, interval, transpose, distance } from "@tonaljs/tonal";
-
-note("A4").midi; // => 60
-note("a4").freq; // => 440
-note("c#2").accidentals; // => '#'
-note("x").midi; // => undefined
-interval("5P").semitones; // => 7
-transpose("C4", "5P"); // => "G4"
-distance("C4", "G4"); // => "5P"
-```
-<small>See https://github.com/tonaljs/tonal</small>
-<em>Version 3 in TypeScript!</em>
-
-</section>
-
-<section>
-
-## Mingus (python)
-
-```python
->>> intervals.minor_second("C")
-"Db"
->>> intervals.major_sixth("C")
-"A"
->>> chords.minor_triad("C")
-["C", "Eb", "G"]
->>> chords.diminished_triad("C")
-["C", "Eb", "Gb"]
->>> chords.major_seventh("C")
-["C", "E", "G", "B"]
-```
-<small>See https://bspaans.github.io/python-mingus/</small>
-
-</section>
 
 <section>
 
@@ -133,13 +44,13 @@ distance("C4", "G4"); // => "5P"
 
 ```elm
 type NoteName
-  = C
+  = A
+  | B          
+  | C
   | D
   | E
   | F
   | G
-  | A
-  | B          
 ```
 </section>
 
@@ -149,12 +60,10 @@ type NoteName
 
 ```elm
 type Accidental
-  = DoubleSharp
-  | Sharp
-  | Natural
+  = Sharp
   | None
   | Flat
-  | DoubleFlat
+  ...
 ```
 </section>
 
@@ -167,8 +76,8 @@ type Accidental
 -}
 type alias Note =
   { name : NoteName
-  , octave : Int
   , accidental : Accidental
+  , octave : Int
   }
 ```
 </section>
@@ -187,6 +96,13 @@ renderNotes notes clef =
 renderNotes [ Note C 4 None ] Treble
 ```
 </section>
+
+<section>
+
+{% include 'middleC.svg' %}
+
+</section>
+
 
 <section>
 
@@ -241,11 +157,6 @@ update msg model =
 
 </section>
 
-<section>
-
-# What Is An Interval?
-
-</section>
 
 <section>
 
@@ -262,11 +173,9 @@ type alias Interval =
 
 ```elm
 type Quality
-    = Diminished
-    | Minor
+    = Minor
     | Major
-    | Augmented
-    | Perfect
+    ...
 ```
 
 </section>
@@ -278,24 +187,6 @@ type Quality
 -}
 type alias IntervalName =
     { quality : Quality, interval : Int 
-```
-
-</section>
-
-<section>
-
-```elm
-{-| getInterval (IntervalName Major 6) Up (Note C 4 None) == [ Note C 4 None, Note A 4 None ]
--}
-getInterval : IntervalName -> Direction -> Note -> List Note
-getInterval interval direction root =
-    case direction of
-        Up ->
-            [ root, transposeNote interval direction root ]
-
-        Down ->
-            [ transposeNote interval direction root, root ]
-
 ```
 
 </section>
@@ -330,25 +221,6 @@ noteNameToStep note =
 <section>
 
 ```elm
-stepToNoteName : Int -> Maybe NoteName
-stepToNoteName step =
-    case step of
-        0 -> Just C
-        1 -> Just D
-        2 -> Just E
-        3 -> Just F
-        4 -> Just G
-        5 -> Just A
-        6 -> Just B
-        _ -> Nothing
-
-```
-
-</section>
-
-<section>
-
-```elm
 {-| get the absolute half step id of the note names (i.e. the white keys)
 -}
 noteNameToHalfStep : NoteName -> Int
@@ -374,17 +246,13 @@ noteNameToHalfStep note =
   adjustHalfStepAccidental : NoteName -> Accidental -> Int
   adjustHalfStepAccidental note accidental =
       case accidental of
-          DoubleFlat -> noteNameToHalfStep note - 2
-
-          Flat -> noteNameToHalfStep note - 1
-
-          Natural -> noteNameToHalfStep note
+          Sharp -> noteNameToHalfStep note + 1
 
           None -> noteNameToHalfStep note
 
-          Sharp -> noteNameToHalfStep note + 1
+          Flat -> noteNameToHalfStep note - 1
 
-          DoubleSharp -> noteNameToHalfStep note + 2
+          ...
 ```
 
 </section>
@@ -396,64 +264,6 @@ noteNameToHalfStep note =
 {{ inlineElm('intervals', 'Intervals') }}
 
 </section>
-
-<section>
-
-## Notes as Primitives??? :confused:
-
-</section>
-
-<section>
-
-# A {% include "sharp.svg" %} == B {% include "flat.svg" %}
-
-</section>
-
-<section>
-
-```elm
-compareNotes : Note -> Note -> Order
-compareNotes note1 note2 =
-    let
-        n1 =
-            noteToInt note1
-
-        n2 =
-            noteToInt note2
-    in
-    compare n1 n2
-```
-</section>
-
-<section>
-
-```elm
-{-| equivalent to (==) note1 note2
--}
-notesEQ : Note -> Note -> Bool
-notesEQ note1 note2 =
-    compareNotes note1 note2 == EQ
-
-
-{-| equivalent to (<) note1 note2
--}
-notesLT : Note -> Note -> Bool
-notesLT note1 note2 =
-    compareNotes note1 note2 == LT
-```
-
-</section>
-
-<section>
-
-```elm
-sortNotes : List Note -> List Note
-sortNotes notes =
-    List.sortWith compareNotes note
-```
-
-</section>
-
 
 <section>
 
@@ -538,5 +348,73 @@ getSeventhChord root quality =
 ### Seventh Chord Flashcards
 
 {{ inlineElm('sevenths', 'Sevenths') }}
+
+</section>
+
+<section>
+
+# Previous Work
+
+</section>
+
+<section>
+
+## Teoria.js
+
+```js
+// Create notes:
+var a4 = teoria.note('a4');       // Scientific notation
+var g5 = teoria.note("g''");      // Helmholtz notation
+var c3 = teoria.note.fromKey(28); // From a piano key number
+
+// Find and create notes based on intervals
+teoria.interval(a4, g5);    // Returns a Interval object representing a minor seventh
+teoria.interval(a4, 'M6');  // Returns a Note representing F#5
+a4.interval('m3');          // Returns a Note representing C#4
+a4.interval(g5);            // Returns a Interval object representing a minor seventh
+a4.interval(teoria.note('bb5')).invert(); // Returns a Interval representing a major seventh
+```
+
+<small>See https://github.com/saebekassebil/teoria</small>
+
+</section>
+
+<section>
+
+## Tonal.js
+
+```js
+import { note, interval, transpose, distance } from "@tonaljs/tonal";
+
+note("A4").midi; // => 60
+note("a4").freq; // => 440
+note("c#2").accidentals; // => '#'
+note("x").midi; // => undefined
+interval("5P").semitones; // => 7
+transpose("C4", "5P"); // => "G4"
+distance("C4", "G4"); // => "5P"
+```
+<small>See https://github.com/tonaljs/tonal</small>
+<em>Version 3 in TypeScript!</em>
+
+</section>
+
+<section>
+
+## Mingus (python)
+
+```python
+>>> intervals.minor_second("C")
+"Db"
+>>> intervals.major_sixth("C")
+"A"
+>>> chords.minor_triad("C")
+["C", "Eb", "G"]
+>>> chords.diminished_triad("C")
+["C", "Eb", "Gb"]
+>>> chords.major_seventh("C")
+["C", "E", "G", "B"]
+```
+<small>See https://bspaans.github.io/python-mingus/</small>
 
 </section>
