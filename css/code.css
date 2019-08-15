@@ -43,7 +43,7 @@ pre.language-python::before {
 }
 
 .highlight-line:not(:last-child) {
-  min-width: 97%;
+  min-width: 98%;
 }
 .highlight-line .highlight-line:not(:last-child) {
   min-width: 0;
@@ -58,10 +58,18 @@ pre.language-python::before {
     background-color: #444;
     background-color: hsla(0, 0%, 27%, .8);
 }
+.highlight-line-add:before {
+    content: '+'
+}
 .highlight-line-add {
     background-color: #45844b;
+    padding-left: 4px;
+}
+.highlight-line-remove:before {
+    content: '-'
 }
 .highlight-line-remove {
     background-color: #902f2f;
+    padding-left: 4px;
 }
 

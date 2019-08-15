@@ -7,15 +7,18 @@ layout: layouts/base.njk
 
 ## Building a Music Theory API with Types
 
-<aside class="notes">
-Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit »S« on your keyboard).
-</aside>
-
 </section>
 
 <section>
 
 ## @pianomanfrazier
+
+<aside class="notes">
+
+- who I am
+- Twitter, Github, blog at pianomanfrazier.com
+
+</aside>
 
 </section>
 
@@ -27,58 +30,23 @@ Oh hey, these are some notes. They'll be hidden in your presentation, but you ca
 
 <section>
 
-# Why It Matters
-
-</section>
-
-
-<section>
-
-# Types
+# Note Flashcards
 
 </section>
 
 <section>
 
-## Note Name
+## Note Type
 
 ```elm
 type NoteName
-  = A
-  | B          
-  | C
-  | D
-  | E
-  | F
-  | G
-```
-</section>
-
-<section>
-
-## Accidental
-
-```elm
-type Accidental
-  = Sharp
-  | None
-  | Flat
-  ...
-```
-</section>
-
-<section>
-
-## Note Record
-
-```elm
-{-| Middle C == Note C 4 None
--}
-type alias Note =
-  { name : NoteName
-  , accidental : Accidental
-  , octave : Int
-  }
+    = C
+    | D
+    | E
+    | F
+    | G
+    | A
+    | B          
 ```
 </section>
 
@@ -87,58 +55,11 @@ type alias Note =
 ## Render Notes
 
 ```elm
-renderNotes : List Note -> Clef -> Html msg
-renderNotes notes clef =
-  svg [...] [...]
+renderNotes : List NoteName -> Html msg
+renderNotes notes =
+    svg [...] [...]
 ```
 
-```elm
-renderNotes [ Note C 4 None ] Treble
-```
-</section>
-
-<section>
-
-{% include 'middleC.svg' %}
-
-</section>
-
-
-<section>
-
-# Random
-
-</section>
-
-<section>
-
-## Random Precedence
-
-1. Clef
-2. Note from clef range
-</section>
-
-<section>
-
-## Random Precendence
- 
-```elm/5,10
-update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-  case msg of
-    GetRandomClef ->
-      ( model
-      , Random.generate NewClef <| Random.Array.sample <| Array.fromList clefPool
-      )
-
-    NewClef clef ->
-      ( { model | clef = clef }
-      , Random.generate NewNote <| Random.Array.sample <| Array.fromList (clefNoteRange clef)
-      )
-
-    NewNote note ->
-      ( { model | note = note }, Cmd.none )
-```
 </section>
 
 {% from 'macros.njk' import inlineElm %}
@@ -153,59 +74,15 @@ update msg model =
 
 <section>
 
-# Intervals?
-
-</section>
-
-
-<section>
-
-```elm
-{-| Major Sixth == { number : 6, halfSteps : 9 }
--}
-type alias Interval =
-    { number : Int, halfSteps : Int }
-```
+# Intervals
 
 </section>
 
 <section>
 
 ```elm
-type Quality
-    = Minor
-    | Major
-    ...
-```
-
-</section>
-
-<section>
-
-```elm
-{-| IntervalName Major 6
--}
-type alias IntervalName =
-    { quality : Quality, interval : Int 
-```
-
-</section>
-
-<section>
-
-## Major = :)
-
-## Minor = :(
-
-</section>
-
-<section>
-
-```elm
-{-| get the absolute step id of the note names (i.e. the white keys)
--}
-noteNameToStep : NoteName -> Int
-noteNameToStep note =
+noteNameToInt : NoteName -> Int
+noteNameToInt note =
     case note of
         C -> 0
         D -> 1
@@ -220,9 +97,111 @@ noteNameToStep note =
 
 <section>
 
+## Compute Distance
+
 ```elm
-{-| get the absolute half step id of the note names (i.e. the white keys)
--}
+computeDistance : NoteName -> NoteName -> Int
+computeDistance note1 note2 =
+    let
+        n1 = noteNameToInt note1
+        n2 = noteNameToInt note2
+    in
+    abs <| n1 - n2
+```
+</section>
+
+<section>
+
+## What about the octave?
+
+</section>
+
+<section>
+
+## Note Record 
+
+```elm
+type alias Note =
+    { name : NoteName
+    , octave : Int
+    }
+```
+</section>
+
+<section>
+
+## New Distance Function
+
+```elm/1,5,7/0,4,6
+computeDistance : NoteName -> NoteName -> Int
+computeDistance : Note -> Note -> Int
+computeDistance note1 note2 =
+    let
+        n1 = noteNameToInt note1
+        n1 = noteNameToInt note1.name + note1.octave * 7
+        n2 = noteNameToInt note2
+        n2 = noteNameToInt note2.name + note2.octave * 7
+    in
+    abs <| n1 - n2
+```
+
+</section>
+
+<section>
+
+### Interval Flashcards
+
+{{ inlineElm('basicintervals', 'IntervalBasics') }}
+
+</section>
+
+<section>
+
+# Black keys?
+
+</section>
+
+<section>
+
+## New Note Record
+
+```elm/2/
+type alias Note =
+    { name : NoteName
+    , accidental : Accidental
+    , octave : Int
+    }
+```
+</section>
+
+<section>
+
+## Accidental
+
+```elm
+type Accidental
+    = Sharp
+    | None
+    | Flat
+    ...
+```
+</section>
+
+<section>
+
+{% include 'fsharp.svg' %}
+
+</section>
+
+<section>
+
+## Major and minor intervals
+
+</section>
+
+<section>
+
+```elm
 noteNameToHalfStep : NoteName -> Int
 noteNameToHalfStep note =
     case note of
@@ -241,19 +220,34 @@ noteNameToHalfStep note =
 <section>
 
 ```elm
-{-| Given a NoteName and an accidental return absolute half step count
-  -}
-  adjustHalfStepAccidental : NoteName -> Accidental -> Int
-  adjustHalfStepAccidental note accidental =
-      case accidental of
-          Sharp -> noteNameToHalfStep note + 1
+adjustHalfStepAccidental : NoteName -> Accidental -> Int
+adjustHalfStepAccidental note accidental =
+    case accidental of
+        Sharp -> noteNameToHalfStep note + 1
 
-          None -> noteNameToHalfStep note
+        None -> noteNameToHalfStep note
 
-          Flat -> noteNameToHalfStep note - 1
+        Flat -> noteNameToHalfStep note - 1
 
-          ...
+        ...
 ```
+
+</section>
+
+<section>
+
+```elm
+type Quality
+    = Minor
+    | Major
+    ...
+```
+
+</section>
+
+<section>
+
+## TODO: show math to compute quality
 
 </section>
 
@@ -274,22 +268,15 @@ noteNameToHalfStep note =
 <section>
 
 ```elm
-{-|
-getTriad (Note C 1 None) Major ==
-  [ Note C 1 None, Note E 1 None, Note G 1 None ] 
--}
 getTriad : Note -> Quality -> List Note
 getTriad root quality =
     case quality of
-        Diminished -> [ root, getNote Min 3, getNote Dim 5 ]
-
-        Minor -> [ root, getNote Min 3, getNote Perfect 5 ]
-
-        Major -> [ root, getNote Maj 3, getNote Perfect 5 ]
-
-        Augmented -> [ root, getNote Maj 3, getNote Aug 5 ]
-
-        Perfect -> []
+        Major ->
+            [ root
+            , getInterval root Major 3
+            , getInterval root Perfect 5
+            ]
+        ...
 ```
 
 </section>
@@ -312,12 +299,8 @@ getTriad root quality =
 
 ```elm
 type Quality7
-    = FullDim
-    | HalfDim
-    | Dominant
-    | MinMaj
-    | MajMaj
-    | MinMin
+    = Dominant
+    ...
 ```
 
 </section>
@@ -328,17 +311,9 @@ type Quality7
 getSeventhChord : Note -> Quality7 -> List Note
 getSeventhChord root quality =
     case quality of
-        FullDim -> getTriad root Dim ++ [ getNote Dim 7 ]
-
-        HalfDim -> getTriad root Dim ++ [ getNote Min 7 ]
-
-        MinMin -> getTriad root Min ++ [ getNote Min 7 ]
-
-        MinMaj -> getTriad root Min ++ [ getNote Maj 7 ]
-
-        MajMaj -> getTriad root Maj ++ [ getNote Maj 7 ]
-
-        Dominant -> getTriad root Maj ++ [ getNote Min 7 ]
+        Dominant ->
+            getTriad root Maj ++ [ getInterval root Min 7 ]
+        ...
 ```
 
 </section>
@@ -348,6 +323,19 @@ getSeventhChord root quality =
 ### Seventh Chord Flashcards
 
 {{ inlineElm('sevenths', 'Sevenths') }}
+
+</section>
+
+<section>
+
+## What's next?
+
+<ul>
+    <li class="fragment">Harmonic Analysis</li>
+    <li class="fragment">Music Generation</li>
+    <li class="fragment">LilyPond parser & type setting</li>
+    <li class="fragment">Typed Theory Backend (Rust or Haskell)</li>
+</ul>
 
 </section>
 
