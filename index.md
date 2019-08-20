@@ -149,6 +149,24 @@ computeDistance note1 note2 =
 
 <section>
 
+## Generate another note
+
+```elm
+getBasicInterval : Note -> Int -> Note
+getBasicInterval note interval =
+    ...
+```
+
+```elm
+middleC = Note C None 4
+interval = 3
+getBasicInterval middleC interval == Note E None 4
+```
+
+</section>
+
+<section>
+
 ### Interval Flashcards
 
 {{ inlineElm('basicintervals', 'IntervalBasics') }}
@@ -163,19 +181,6 @@ computeDistance note1 note2 =
 
 <section>
 
-## New Note Record
-
-```elm/2/
-type alias Note =
-    { name : NoteName
-    , accidental : Accidental
-    , octave : Int
-    }
-```
-</section>
-
-<section>
-
 ## Accidental
 
 ```elm
@@ -184,6 +189,19 @@ type Accidental
     | None
     | Flat
     ...
+```
+</section>
+
+<section>
+
+## New Note Record
+
+```elm/2/
+type alias Note =
+    { name : NoteName
+    , accidental : Accidental
+    , octave : Int
+    }
 ```
 </section>
 
@@ -216,20 +234,32 @@ noteNameToHalfStep note =
 
 </section>
 
+<section>
+
+```elm
+accidentalToHalfStep : Accidental -> Int
+accidentalToHalfStep accidental =
+    case accidental of
+        Sharp -> 1
+
+        None -> 0
+
+        Flat -> -1
+
+        ...
+```
+
+</section>
+
 
 <section>
 
 ```elm
-adjustHalfStepAccidental : NoteName -> Accidental -> Int
-adjustHalfStepAccidental note accidental =
-    case accidental of
-        Sharp -> noteNameToHalfStep note + 1
-
-        None -> noteNameToHalfStep note
-
-        Flat -> noteNameToHalfStep note - 1
-
-        ...
+noteToHalfStep : Note -> Int
+noteToHalfStep note =
+    noteNameToHalfStep note.name +
+    accidentalToHalfStep note.accidental +
+    note.octave * 12
 ```
 
 </section>
@@ -247,7 +277,65 @@ type Quality
 
 <section>
 
-## TODO: show math to compute quality
+```elm
+computeInterval : Note -> Note -> (Quality, Int)
+computeInterval note1 note2 =
+    let
+        halfSteps =
+            abs <| noteToHalfStep note1 - noteToHalfStep note2
+        
+        distance = 
+            computeDistance note1 note2
+    in
+    case distance of
+        -- actually a 3rd
+        2 ->
+            case halfSteps of
+                3 -> (Minor, distance + 1)
+                4 -> (Major, distance + 1)
+        ...
+```
+
+</section>
+
+<section>
+
+## What about a 10^th^?
+
+</section>
+
+<section>
+
+## New compute
+
+```elm/1,5/0,4
+    case distance of
+    case modBy 7 distance of
+        -- 3rd, 10th, 17th, ...
+        2 ->
+            case halfSteps of
+            case modBy 12 halfSteps of
+                3 -> (Minor, distance + 1)
+                4 -> (Major, distance + 1)
+```
+
+</section>
+
+<section>
+
+## Generate Full Interval
+
+```elm
+getInterval : Note -> (Quality, Int) -> Note
+getInterval note (quality, interval) =
+    ...
+```
+
+```elm
+middleC = Note C None 4
+interval = (Minor, 3)
+getInterval middleC interval == Note E Flat 4
+```
 
 </section>
 
@@ -328,20 +416,23 @@ getSeventhChord root quality =
 
 <section>
 
-## What's next?
-
-<ul>
-    <li class="fragment">Harmonic Analysis</li>
-    <li class="fragment">Music Generation</li>
-    <li class="fragment">LilyPond parser & type setting</li>
-    <li class="fragment">Typed Theory Backend (Rust or Haskell)</li>
-</ul>
+# Previous Work
 
 </section>
 
 <section>
 
-# Previous Work
+## Tonal.js
+
+```js
+import { note, interval, distance } from "@tonaljs/tonal";
+
+note("A4")
+interval.names(); // => ["1P", "2M", "3M", "4P", "5P", "6m", "7m"]
+distance("C4", "G4"); // => "5P"
+```
+<small>See https://github.com/tonaljs/tonal</small>
+<em>Version 3 in TypeScript!</em>
 
 </section>
 
@@ -351,39 +442,15 @@ getSeventhChord root quality =
 
 ```js
 // Create notes:
-var a4 = teoria.note('a4');       // Scientific notation
-var g5 = teoria.note("g''");      // Helmholtz notation
-var c3 = teoria.note.fromKey(28); // From a piano key number
+var a4 = teoria.note('a4');
+var g5 = teoria.note("g5");
 
 // Find and create notes based on intervals
-teoria.interval(a4, g5);    // Returns a Interval object representing a minor seventh
-teoria.interval(a4, 'M6');  // Returns a Note representing F#5
-a4.interval('m3');          // Returns a Note representing C#4
-a4.interval(g5);            // Returns a Interval object representing a minor seventh
-a4.interval(teoria.note('bb5')).invert(); // Returns a Interval representing a major seventh
+teoria.interval(a4, g5);    // Returns a Interval object
+teoria.interval(a4, 'M6');  // Returns a Note object
 ```
 
 <small>See https://github.com/saebekassebil/teoria</small>
-
-</section>
-
-<section>
-
-## Tonal.js
-
-```js
-import { note, interval, transpose, distance } from "@tonaljs/tonal";
-
-note("A4").midi; // => 60
-note("a4").freq; // => 440
-note("c#2").accidentals; // => '#'
-note("x").midi; // => undefined
-interval("5P").semitones; // => 7
-transpose("C4", "5P"); // => "G4"
-distance("C4", "G4"); // => "5P"
-```
-<small>See https://github.com/tonaljs/tonal</small>
-<em>Version 3 in TypeScript!</em>
 
 </section>
 
@@ -394,15 +461,22 @@ distance("C4", "G4"); // => "5P"
 ```python
 >>> intervals.minor_second("C")
 "Db"
->>> intervals.major_sixth("C")
-"A"
 >>> chords.minor_triad("C")
 ["C", "Eb", "G"]
->>> chords.diminished_triad("C")
-["C", "Eb", "Gb"]
->>> chords.major_seventh("C")
-["C", "E", "G", "B"]
 ```
 <small>See https://bspaans.github.io/python-mingus/</small>
+
+</section>
+
+<section>
+
+## What's next?
+
+<ul>
+    <li class="fragment">Harmonic Analysis</li>
+    <li class="fragment">Music Generation</li>
+    <li class="fragment">LilyPond parser & type setting</li>
+    <li class="fragment">Typed Theory Backend (Rust or Haskell)</li>
+</ul>
 
 </section>
