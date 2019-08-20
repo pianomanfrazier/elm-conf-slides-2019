@@ -379,104 +379,13 @@ getTriad root quality =
 
 <section>
 
-# 7^th^ Chords
-
-</section>
-
-<section>
-
-```elm
-type Quality7
-    = Dominant
-    ...
-```
-
-</section>
-
-<section>
-
-```elm
-getSeventhChord : Note -> Quality7 -> List Note
-getSeventhChord root quality =
-    case quality of
-        Dominant ->
-            getTriad root Maj ++ [ getInterval root Min 7 ]
-        ...
-```
-
-</section>
-
-<section>
-
-### Seventh Chord Flashcards
-
-{{ inlineElm('sevenths', 'Sevenths') }}
-
-</section>
-
-<section>
-
-# Previous Work
-
-</section>
-
-<section>
-
-## Tonal.js
-
-```js
-import { note, interval, distance } from "@tonaljs/tonal";
-
-note("A4")
-interval.names(); // => ["1P", "2M", "3M", "4P", "5P", "6m", "7m"]
-distance("C4", "G4"); // => "5P"
-```
-<small>See https://github.com/tonaljs/tonal</small>
-<em>Version 3 in TypeScript!</em>
-
-</section>
-
-<section>
-
-## Teoria.js
-
-```js
-// Create notes:
-var a4 = teoria.note('a4');
-var g5 = teoria.note("g5");
-
-// Find and create notes based on intervals
-teoria.interval(a4, g5);    // Returns a Interval object
-teoria.interval(a4, 'M6');  // Returns a Note object
-```
-
-<small>See https://github.com/saebekassebil/teoria</small>
-
-</section>
-
-<section>
-
-## Mingus (python)
-
-```python
->>> intervals.minor_second("C")
-"Db"
->>> chords.minor_triad("C")
-["C", "Eb", "G"]
-```
-<small>See https://bspaans.github.io/python-mingus/</small>
-
-</section>
-
-<section>
-
 ## What's next?
 
 <ul>
     <li class="fragment">Harmonic Analysis</li>
     <li class="fragment">Music Generation</li>
-    <li class="fragment">LilyPond parser & type setting</li>
     <li class="fragment">Typed Theory Backend (Rust or Haskell)</li>
+    <li class="fragment">LilyPond parser & type setting</li>
 </ul>
 
 </section>
