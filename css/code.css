@@ -59,17 +59,21 @@ pre.language-python::before {
     background-color: hsla(0, 0%, 27%, .8);
 }
 .highlight-line-add:before {
-    content: '+'
+    content: '+';
+    font-weight: 700;
 }
 .highlight-line-add {
-    background-color: #45844b;
-    padding-left: 4px;
+    /* background-color: #45844b; */
+    background-color: #144405;
+    padding-left: 5px;
 }
 .highlight-line-remove:before {
-    content: '-'
+    content: '-';
+    font-weight: 700;
 }
 .highlight-line-remove {
-    background-color: #902f2f;
-    padding-left: 4px;
+    /* background-color: #902f2f; */
+    background-color: #570d0d;
+    padding-left: 5px;
 }
 
