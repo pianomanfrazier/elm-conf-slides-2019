@@ -149,7 +149,37 @@ computeDistance note1 note2 =
 
 <section>
 
-## Generate another note
+## New Distance Function
+
+</section>
+
+<section>
+
+```elm//0,3,4
+computeDistance : NoteName -> NoteName -> Int
+computeDistance note1 note2 =
+    let
+        n1 = noteNameToInt note1
+        n2 = noteNameToInt note2
+    in
+    abs <| n1 - n2
+```
+
+```elm/0,3,4/
+computeDistance : Note -> Note -> Int
+computeDistance note1 note2 =
+    let
+        n1 = noteNameToInt note1.name + note1.octave * 7
+        n2 = noteNameToInt note2.name + note2.octave * 7
+    in
+    abs <| n1 - n2
+```
+
+</section>
+
+<section>
+
+## Generate an interval
 
 ```elm
 getBasicInterval : Note -> Int -> Note
@@ -157,11 +187,15 @@ getBasicInterval note interval =
     ...
 ```
 
+<div class="fragment">
+
 ```elm
 middleC = Note C None 4
 interval = 3
 getBasicInterval middleC interval == Note E None 4
 ```
+
+</div>
 
 </section>
 
@@ -287,6 +321,13 @@ computeInterval note1 note2 =
         distance = 
             computeDistance note1 note2
     in
+```
+
+</section>
+
+<section>
+
+```elm
     case distance of
         -- actually a 3rd
         2 ->
@@ -323,6 +364,34 @@ computeInterval note1 note2 =
 
 <section>
 
+## New Compute Interval
+
+</section>
+
+<section>
+
+```elm//0,3
+    case distance of
+        -- 3rd
+        2 ->
+            case halfSteps of
+                3 -> (Minor, distance + 1)
+                4 -> (Major, distance + 1)
+```
+
+```elm/0,3/
+    case modBy 7 distance of
+        -- 3rd, 10th, 17th, ...
+        2 ->
+            case modBy 12 halfSteps of
+                3 -> (Minor, distance + 1)
+                4 -> (Major, distance + 1)
+```
+
+</section>
+
+<section>
+
 ## Generate Full Interval
 
 ```elm
@@ -331,11 +400,15 @@ getInterval note (quality, interval) =
     ...
 ```
 
+<div class="fragment">
+
 ```elm
 middleC = Note C None 4
 interval = (Minor, 3)
 getInterval middleC interval == Note E Flat 4
 ```
+
+</div>
 
 </section>
 
@@ -385,7 +458,7 @@ getTriad root quality =
     <li class="fragment">Harmonic Analysis</li>
     <li class="fragment">Music Generation</li>
     <li class="fragment">Typed Theory Backend (Rust or Haskell)</li>
-    <li class="fragment">LilyPond parser & type setting</li>
+    <!-- <li class="fragment">LilyPond parser & type setting</li> -->
 </ul>
 
 </section>
