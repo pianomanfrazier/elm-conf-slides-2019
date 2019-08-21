@@ -132,43 +132,13 @@ type alias Note =
 
 ## New Distance Function
 
-```elm/1,5,7/0,4,6
+```elm/1,6,7/0,4,5
 computeDistance : NoteName -> NoteName -> Int
 computeDistance : Note -> Note -> Int
 computeDistance note1 note2 =
     let
         n1 = noteNameToInt note1
-        n1 = noteNameToInt note1.name + note1.octave * 7
         n2 = noteNameToInt note2
-        n2 = noteNameToInt note2.name + note2.octave * 7
-    in
-    abs <| n1 - n2
-```
-
-</section>
-
-<section>
-
-## New Distance Function
-
-</section>
-
-<section>
-
-```elm//0,3,4
-computeDistance : NoteName -> NoteName -> Int
-computeDistance note1 note2 =
-    let
-        n1 = noteNameToInt note1
-        n2 = noteNameToInt note2
-    in
-    abs <| n1 - n2
-```
-
-```elm/0,3,4/
-computeDistance : Note -> Note -> Int
-computeDistance note1 note2 =
-    let
         n1 = noteNameToInt note1.name + note1.octave * 7
         n2 = noteNameToInt note2.name + note2.octave * 7
     in
@@ -364,34 +334,6 @@ computeInterval note1 note2 =
 
 <section>
 
-## New Compute Interval
-
-</section>
-
-<section>
-
-```elm//0,3
-    case distance of
-        -- 3rd
-        2 ->
-            case halfSteps of
-                3 -> (Minor, distance + 1)
-                4 -> (Major, distance + 1)
-```
-
-```elm/0,3/
-    case modBy 7 distance of
-        -- 3rd, 10th, 17th, ...
-        2 ->
-            case modBy 12 halfSteps of
-                3 -> (Minor, distance + 1)
-                4 -> (Major, distance + 1)
-```
-
-</section>
-
-<section>
-
 ## Generate Full Interval
 
 ```elm
@@ -455,7 +397,7 @@ getTriad root quality =
 ## What's next?
 
 <ul>
-    <li class="fragment">Harmonic Analysis</li>
+    <li class="fragment">Harmonic Analysis (music)</li>
     <li class="fragment">Music Generation</li>
     <li class="fragment">Typed Theory Backend (Rust or Haskell)</li>
     <!-- <li class="fragment">LilyPond parser & type setting</li> -->
