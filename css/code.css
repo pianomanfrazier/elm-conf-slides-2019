@@ -8,16 +8,17 @@ code, pre {
 }
 pre {
   margin-bottom: 2em !important;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 pre::before {
   font-weight: bold;
+  font-style: italic;
   position: absolute;
-  top: 0.5em;
-  right: 1em;
+  top: 0.3em;
+  right: 0.7em;
 }
 pre.language-elm::before {
-  color: hotpink;
+  color: #fd971f;
   content: "Elm";
 }
 pre.language-js::before {
@@ -43,7 +44,7 @@ pre.language-python::before {
 }
 
 .highlight-line:not(:last-child) {
-  min-width: 98%;
+  min-width: 97%;
 }
 .highlight-line .highlight-line:not(:last-child) {
   min-width: 0;
@@ -61,19 +62,23 @@ pre.language-python::before {
 .highlight-line-add:before {
     content: '+';
     font-weight: 700;
+    padding-right: 3px;
 }
 .highlight-line-add {
     /* background-color: #45844b; */
-    background-color: #144405;
-    padding-left: 5px;
+    background-color: #bbff9b;
+    border: 1px solid #329e00;
+    padding-left: 3px;
 }
 .highlight-line-remove:before {
     content: '-';
     font-weight: 700;
+    padding-right: 3px;
 }
 .highlight-line-remove {
     /* background-color: #902f2f; */
-    background-color: #570d0d;
-    padding-left: 5px;
+    background-color: #ffd6d6;
+    border: 1px solid #ff2929;
+    padding-left: 3px;
 }
 
