@@ -66,7 +66,7 @@ pre.language-python::before {
 }
 .highlight-line-add {
     /* background-color: #45844b; */
-    background-color: #bbff9b;
+    background-color: #dbffca;
     border: 1px solid #329e00;
     padding-left: 3px;
 }
@@ -77,7 +77,7 @@ pre.language-python::before {
 }
 .highlight-line-remove {
     /* background-color: #902f2f; */
-    background-color: #ffd6d6;
+    background-color: #ffe2e2;
     border: 1px solid #ff2929;
     padding-left: 3px;
 }
