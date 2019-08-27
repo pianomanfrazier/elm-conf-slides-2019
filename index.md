@@ -9,52 +9,13 @@ layout: layouts/base.njk
 
 </section>
 
-<section>
+<!-- <section>
 
 ## @pianomanfrazier
 
-<aside class="notes">
-
-- who I am
-- Twitter, Github, blog at pianomanfrazier.com
-
-</aside>
-
-</section>
-
-<section data-background-image="/img/ryan-piano.jpg"></section>
-
-<section data-background-image="/img/daumier-chess.jpg"></section>
-
-<!-- <section>
-
-## Recall memory for visually presented chess positions
-
-<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
-
 </section> -->
 
-<section>
-
-<img src="/img/immortal_game.png" alt="The Immortal Game" width="60%">
-
-</section>
-
-<section>
-
-<img src="/img/blank-chess.png" alt="Blank Chess Board" width="60%">
-
-</section>
-
-<section>
-
-<img src="/img/chess.svg" alt="Chess Figure 1" height="60%">
-
-<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
-
-</section>
-
-<section data-background-image="/img/frank-violin-sonata.png"></section>
+<section data-background-image="/img/ryan-piano.jpg"></section>
 
 <section data-background-image="/img/piano-flashcards.jpg"></section>
 
@@ -95,6 +56,40 @@ renderNotes notes =
 {{ inlineElm('notes', 'Notes') }}
 
 </section>
+
+<section data-background-image="/img/daumier-chess.jpg"></section>
+
+<!-- <section>
+
+## Recall memory for visually presented chess positions
+
+<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
+
+</section> -->
+
+<section>
+
+<img src="/img/immortal_game.png" alt="The Immortal Game" width="60%">
+
+</section>
+
+<section>
+
+<img src="/img/blank-chess.png" alt="Blank Chess Board" width="60%">
+
+</section>
+
+<section>
+
+<img src="/img/chess.svg" alt="Chess Figure 1" height="60%">
+
+<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
+
+</section>
+
+<section data-background-image="/img/frank-violin-sonata.png"></section>
+
+<section data-background-image="/img/frank-violin-sonata-analysis.png"></section>
 
 <section>
 
