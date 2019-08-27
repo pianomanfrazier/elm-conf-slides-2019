@@ -22,17 +22,41 @@ layout: layouts/base.njk
 
 </section>
 
+<section data-background-image="/img/ryan-piano.jpg"></section>
+
+<section data-background-image="/img/daumier-chess.jpg"></section>
+
+<!-- <section>
+
+## Recall memory for visually presented chess positions
+
+<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
+
+</section> -->
+
 <section>
 
-# My Problem
+<img src="/img/immortal_game.png" alt="The Immortal Game" width="60%">
 
 </section>
 
 <section>
 
-# Note Flashcards
+<img src="/img/blank-chess.png" alt="Blank Chess Board" width="60%">
 
 </section>
+
+<section>
+
+<img src="/img/chess.svg" alt="Chess Figure 1" height="60%">
+
+<small>Frey, P.W. & Adesman, P. Memory & Cognition (1976) 4: 541. https://doi.org/10.3758/BF03213216</small>
+
+</section>
+
+<section data-background-image="/img/frank-violin-sonata.png"></section>
+
+<section data-background-image="/img/piano-flashcards.jpg"></section>
 
 <section>
 
@@ -217,7 +241,7 @@ type alias Note =
 
 <section>
 
-## Major and minor intervals
+## Major and minor
 
 </section>
 
@@ -317,7 +341,7 @@ computeInterval note1 note2 =
 
 <section>
 
-## New compute
+## Mod Arithmetic 
 
 ```elm/1,5/0,4
     case distance of
@@ -402,5 +426,13 @@ getTriad root quality =
     <li class="fragment">Typed Theory Backend (Rust or Haskell)</li>
     <!-- <li class="fragment">LilyPond parser & type setting</li> -->
 </ul>
+
+</section>
+
+<section>
+
+### https://try-it.knowyourtheory.com
+
+### @pianomanfrazier
 
 </section>
