@@ -158,8 +158,8 @@ computeDistance note1 note2 =
     let
         n1 = noteNameToInt note1
         n2 = noteNameToInt note2
-        n1 = noteNameToInt note1.name + note1.octave * 7
-        n2 = noteNameToInt note2.name + note2.octave * 7
+        n1 = noteNameToInt note1.name + (note1.octave * 7)
+        n2 = noteNameToInt note2.name + (note2.octave * 7)
     in
     abs <| n1 - n2
 ```
@@ -176,15 +176,18 @@ getBasicInterval note interval =
     ...
 ```
 
-<div class="fragment">
+</section>
+
+<section>
 
 ```elm
-middleC = Note C None 4
+middleC =
+    { name : C
+    , octave : 1
+    }
 interval = 3
-getBasicInterval middleC interval == Note E None 4
+getBasicInterval middleC interval == Note E 4
 ```
-
-</div>
 
 </section>
 
@@ -307,7 +310,7 @@ computeInterval note1 note2 =
         halfSteps =
             abs <| noteToHalfStep note1 - noteToHalfStep note2
         
-        distance = 
+        letterDistance = 
             computeDistance note1 note2
     in
 ```
@@ -317,12 +320,11 @@ computeInterval note1 note2 =
 <section>
 
 ```elm
-    case distance of
-        -- actually a 3rd
-        2 ->
+    case letterDistance + 1 of
+        3 ->
             case halfSteps of
-                3 -> (Minor, distance + 1)
-                4 -> (Major, distance + 1)
+                3 -> (Minor, letterDistance + 1)
+                4 -> (Major, letterDistance + 1)
         ...
 ```
 
@@ -339,14 +341,13 @@ computeInterval note1 note2 =
 ## Mod Arithmetic 
 
 ```elm/1,5/0,4
-    case distance of
-    case modBy 7 distance of
-        -- 3rd, 10th, 17th, ...
-        2 ->
+    case letterDistance + 1 of
+    case (modBy 7 letterDistance) + 1 of
+        3 ->
             case halfSteps of
             case modBy 12 halfSteps of
-                3 -> (Minor, distance + 1)
-                4 -> (Major, distance + 1)
+                3 -> (Minor, letterDistance + 1)
+                4 -> (Major, letterDistance + 1)
 ```
 
 </section>
@@ -361,15 +362,21 @@ getInterval note (quality, interval) =
     ...
 ```
 
-<div class="fragment">
+</section>
+
+<section>
 
 ```elm
-middleC = Note C None 4
+middleC =
+    { name : C
+    , accidental : None
+    , octave : 4
+    }
 interval = (Minor, 3)
 getInterval middleC interval == Note E Flat 4
 ```
 
-</div>
+</section>
 
 </section>
 
@@ -426,7 +433,7 @@ getTriad root quality =
 
 <section>
 
-### https://try-it.knowyourtheory.com
+## <a href="https://www.knowyourtheory.com" target="_blank">knowyourtheory.com</a>
 
 ### @pianomanfrazier
 
