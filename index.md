@@ -433,8 +433,8 @@ getTriad root quality =
 
 <section>
 
-### <a href="https://app.knowyourtheory.com" target="_blank">app.knowyourtheory.com</a>
+## <a href="https://app.knowyourtheory.com" target="_blank">app.knowyourtheory.com</a>
 
-### @pianomanfrazier
+## @pianomanfrazier
 
 </section>
