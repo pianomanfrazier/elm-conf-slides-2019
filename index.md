@@ -183,7 +183,7 @@ getBasicInterval note interval =
 ```elm
 middleC =
     { name : C
-    , octave : 1
+    , octave : 4
     }
 interval = 3
 getBasicInterval middleC interval == Note E 4
