@@ -239,7 +239,20 @@ type alias Note =
 
 <section>
 
+## Interval Quality
+
+</section>
+
+<section>
+
 ## Major and minor
+
+```elm
+type Quality
+    = Minor
+    | Major
+    ...
+```
 
 </section>
 
@@ -290,16 +303,6 @@ noteToHalfStep note =
 
 </section>
 
-<section>
-
-```elm
-type Quality
-    = Minor
-    | Major
-    ...
-```
-
-</section>
 
 <section>
 
