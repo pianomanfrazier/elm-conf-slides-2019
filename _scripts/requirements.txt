@@ -39,7 +39,7 @@ pep517==0.5.0
 pexpect==4.7.0
 Pillow==6.1.0
 progress==1.5
-psutil==5.6.3
+psutil==5.6.6
 ptyprocess==0.6.0
 pwquality==1.4.0
 pycairo==1.18.1
