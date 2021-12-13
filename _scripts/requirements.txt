@@ -24,7 +24,7 @@ lensfun==0.3.2
 lightdm-gtk-greeter-settings==1.2.2
 lockfile==0.12.2
 louis==3.10.0
-lxml==4.4.1
+lxml==4.6.5
 matplotlib==3.1.1
 menulibre==2.2.1
 msgpack==0.6.1
