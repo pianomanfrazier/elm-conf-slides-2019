@@ -13,7 +13,7 @@ cycler==0.10.0
 distlib==0.2.9
 distro==1.4.0
 docopt==0.6.2
-Guake==3.6.3
+Guake==3.8.5
 gufw==18.10.0
 html5lib==1.0.1
 idna==2.8
