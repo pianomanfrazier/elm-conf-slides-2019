@@ -30,7 +30,7 @@ menulibre==2.2.1
 msgpack==0.6.1
 mugshot==0.4.1
 npyscreen==4.10.5
-numpy==1.17.0
+numpy==1.22.0
 packaging==19.1
 pacman-mirrors==4.14.2
 pandas==0.25.1
